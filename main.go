@@ -13,7 +13,7 @@ import (
 	"github.com/justinian/dice"
 )
 
-// Maus blahblah
+// Maus defines the base stats of a Mausritter character without cosmetics
 type Maus struct {
 	STR         int
 	DEX         int
@@ -24,29 +24,29 @@ type Maus struct {
 	Disposition string
 }
 
-// Birthsigns blahblah
+// Birthsigns is a collection of birthsigns from the Mausritter rulebook
 type Birthsigns struct {
 	Birthsigns []Birthsign `json:"birthsigns"`
 }
 
-// Birthsign blahblah
+// Birthsign is a concrete combination of sign and disposition from the Mausritter rulebook
 type Birthsign struct {
 	Sign        string `json:"sign"`
 	Disposition string `json:"disposition"`
 }
 
-// Coat blahblah
+// Coat is a combination of colors and patterns from the Mausritter rulebook
 type Coat struct {
 	Colors   []Color   `json:"colors"`
 	Patterns []Pattern `json:"patterns"`
 }
 
-// Color blahblah
+// Color is a concrete coat color from the Mausritter rulebook
 type Color struct {
 	Color string `json:"color"`
 }
 
-// Pattern blahblah
+// Pattern is a concrete coat pattern from the Mausritter rulebook
 type Pattern struct {
 	Pattern string `json:"pattern"`
 }
@@ -79,7 +79,7 @@ func main() {
 	}
 }
 
-// GenStats blahblah
+// GenStats generates the base stats of a Mausritter character
 func (myMaus Maus) GenStats() Maus {
 	myMaus.STR = RollStat("3d6kh2")
 	myMaus.DEX = RollStat("3d6kh2")
@@ -89,7 +89,7 @@ func (myMaus Maus) GenStats() Maus {
 	return myMaus
 }
 
-// RollStat blahblah
+// RollStat rolls dice according to a pattern (dice lib) and returns just the integer
 func RollStat(input string) int {
 	res, _, err := dice.Roll(input)
 
@@ -102,7 +102,7 @@ func RollStat(input string) int {
 	return 0
 }
 
-// RollBirthsign blahblah
+// RollBirthsign rolls a random birthsign combination from the Mausritter rulebook
 func RollBirthsign() Birthsign {
 	rawData := ReadJSON("config/birthsigns.json")
 	var birthsigns Birthsigns
@@ -114,7 +114,7 @@ func RollBirthsign() Birthsign {
 	return birthsign
 }
 
-// RollCoat blahblah
+// RollCoat rolls a random coat combination from the Mausritter rulebook
 func RollCoat() (Color, Pattern) {
 	rawData := ReadJSON("config/coat.json")
 	var coat Coat
@@ -130,7 +130,7 @@ func RollCoat() (Color, Pattern) {
 	return color, pattern
 }
 
-// ReadJSON blahblah
+// ReadJSON reads raw data from a JSON file
 func ReadJSON(file string) []byte {
 	// Open our jsonFile
 	jsonFile, err := os.Open(file)
@@ -141,7 +141,7 @@ func ReadJSON(file string) []byte {
 	// defer the closing of our jsonFile so that we can parse it later on
 	defer jsonFile.Close()
 
-	// read our opened xmlFile as a byte array.
+	// read our opened JSON file as a byte array
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 	return byteValue
 }
