@@ -1,0 +1,42 @@
+{
+	"colors": [
+		{
+			"color": "Chocolate"
+		},
+		{
+			"color": "Black"
+		},
+		{
+			"color": "White"
+		},
+		{
+			"color": "Tan"
+		},
+		{
+			"color": "Grey"
+		},
+		{
+			"color": "Blue"
+		}
+	],
+	"patterns": [
+		{
+			"pattern": "Solid"
+		},
+		{
+			"pattern": "Brindle"
+		},
+		{
+			"pattern": "Patchy"
+		},
+		{
+			"pattern": "Banded"
+		},
+		{
+			"pattern": "Marbled"
+		},
+		{
+			"pattern": "Flecked"
+		}
+	]
+}
