@@ -57,8 +57,8 @@ func main() {
 	minSTR := flag.Int("minSTR", 9, "Minimum STR")
 	minDEX := flag.Int("minDEX", 9, "Minimum DEX")
 	minWIL := flag.Int("minWIL", 9, "Minimum WIL")
-	minHP := flag.Int("minHP", 3, "Minimum HP")
-	minPIPS := flag.Int("minPIPS", 3, "Minimum Pips")
+	minHP := flag.Int("minHP", 4, "Minimum HP")
+	minPIPS := flag.Int("minPIPS", 4, "Minimum Pips")
 
 	flag.Parse()
 
