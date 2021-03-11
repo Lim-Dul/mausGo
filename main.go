@@ -24,6 +24,7 @@ type Maus struct {
 	Disposition string
 	Color       string
 	Pattern     string
+	Detail      string
 }
 
 // Birthsigns is a collection of birthsigns from the Mausritter rulebook
@@ -53,6 +54,16 @@ type Pattern struct {
 	Pattern string `json:"pattern"`
 }
 
+// Details
+type Details struct {
+	Details []Detail `json:"details"`
+}
+
+// Detail
+type Detail struct {
+	Detail string `json:"detail"`
+}
+
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
 
@@ -74,6 +85,7 @@ func main() {
 			fmt.Printf("STR: %d DEX: %d WIL: %d HP: %d Pips: %d Tries: %d\n", myMaus.STR, myMaus.DEX, myMaus.WIL, myMaus.HP, myMaus.PIPS, tries)
 			fmt.Printf("Sign: %s | Disposition: %s\n", myMaus.Sign, myMaus.Disposition)
 			fmt.Printf("Color: %s | Pattern: %s\n", myMaus.Color, myMaus.Pattern)
+			fmt.Printf("Detail: %s\n", myMaus.Detail)
 			os.Exit(0)
 		}
 	}
@@ -86,10 +98,10 @@ func (myMaus Maus) GenStats() Maus {
 	myMaus.WIL = RollStat("3d6kh2")
 	myMaus.HP = RollStat("1d6")
 	myMaus.PIPS = RollStat("1d6")
-	birthsign := RollBirthsign()
-	myMaus.Sign = birthsign.Sign
-	myMaus.Disposition = birthsign.Disposition
+
+	myMaus.Sign, myMaus.Disposition = RollBirthsign()
 	myMaus.Color, myMaus.Pattern = RollCoat()
+	myMaus.Detail = RollDetail()
 
 	return myMaus
 }
@@ -108,15 +120,16 @@ func RollStat(input string) int {
 }
 
 // RollBirthsign rolls a random birthsign combination from the Mausritter rulebook
-func RollBirthsign() Birthsign {
+func RollBirthsign() (string, string) {
 	rawData := ReadJSON("config/birthsigns.json")
 	var birthsigns Birthsigns
 	json.Unmarshal(rawData, &birthsigns)
 	nString := "1d" + strconv.Itoa(len(birthsigns.Birthsigns))
 	n := RollStat(nString) - 1
-	var birthsign Birthsign
-	birthsign = birthsigns.Birthsigns[n]
-	return birthsign
+	var sign, disposition string
+	sign = birthsigns.Birthsigns[n].Sign
+	disposition = birthsigns.Birthsigns[n].Disposition
+	return sign, disposition
 }
 
 // RollCoat rolls a random coat combination from the Mausritter rulebook
@@ -128,11 +141,22 @@ func RollCoat() (string, string) {
 	mString := "1d" + strconv.Itoa(len(coat.Patterns))
 	n := RollStat(nString) - 1
 	m := RollStat(mString) - 1
-	var color string
-	var pattern string
+	var color, pattern string
 	color = coat.Colors[n].Color
 	pattern = coat.Patterns[m].Pattern
 	return color, pattern
+}
+
+// RollDetail
+func RollDetail() string {
+	rawData := ReadJSON("config/detail.json")
+	var details Details
+	json.Unmarshal(rawData, &details)
+	nString := "1d" + strconv.Itoa(len(details.Details))
+	n := RollStat(nString) - 1
+	var detail string
+	detail = details.Details[n].Detail
+	return detail
 }
 
 // ReadJSON reads raw data from a JSON file
