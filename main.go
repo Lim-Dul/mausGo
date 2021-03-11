@@ -22,6 +22,8 @@ type Maus struct {
 	PIPS        int
 	Sign        string
 	Disposition string
+	Color       string
+	Pattern     string
 }
 
 // Birthsigns is a collection of birthsigns from the Mausritter rulebook
@@ -71,8 +73,7 @@ func main() {
 		if myMaus.STR >= *minSTR && myMaus.DEX >= *minDEX && myMaus.WIL >= *minWIL && myMaus.HP >= *minHP && myMaus.PIPS >= *minPIPS {
 			fmt.Printf("STR: %d DEX: %d WIL: %d HP: %d Pips: %d Tries: %d\n", myMaus.STR, myMaus.DEX, myMaus.WIL, myMaus.HP, myMaus.PIPS, tries)
 			fmt.Printf("Sign: %s | Disposition: %s\n", myMaus.Sign, myMaus.Disposition)
-			color, pattern := RollCoat()
-			fmt.Printf("Color: %s | Pattern: %s\n", color.Color, pattern.Pattern)
+			fmt.Printf("Color: %s | Pattern: %s\n", myMaus.Color, myMaus.Pattern)
 			os.Exit(0)
 		}
 	}
@@ -88,6 +89,8 @@ func (myMaus Maus) GenStats() Maus {
 	birthsign := RollBirthsign()
 	myMaus.Sign = birthsign.Sign
 	myMaus.Disposition = birthsign.Disposition
+	myMaus.Color, myMaus.Pattern = RollCoat()
+
 	return myMaus
 }
 
@@ -117,7 +120,7 @@ func RollBirthsign() Birthsign {
 }
 
 // RollCoat rolls a random coat combination from the Mausritter rulebook
-func RollCoat() (Color, Pattern) {
+func RollCoat() (string, string) {
 	rawData := ReadJSON("config/coat.json")
 	var coat Coat
 	json.Unmarshal(rawData, &coat)
@@ -125,10 +128,10 @@ func RollCoat() (Color, Pattern) {
 	mString := "1d" + strconv.Itoa(len(coat.Patterns))
 	n := RollStat(nString) - 1
 	m := RollStat(mString) - 1
-	var color Color
-	var pattern Pattern
-	color = coat.Colors[n]
-	pattern = coat.Patterns[m]
+	var color string
+	var pattern string
+	color = coat.Colors[n].Color
+	pattern = coat.Patterns[m].Pattern
 	return color, pattern
 }
 
