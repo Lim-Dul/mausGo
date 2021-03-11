@@ -70,8 +70,7 @@ func main() {
 		*myMaus = myMaus.GenStats()
 		if myMaus.STR >= *minSTR && myMaus.DEX >= *minDEX && myMaus.WIL >= *minWIL && myMaus.HP >= *minHP && myMaus.PIPS >= *minPIPS {
 			fmt.Printf("STR: %d DEX: %d WIL: %d HP: %d Pips: %d Tries: %d\n", myMaus.STR, myMaus.DEX, myMaus.WIL, myMaus.HP, myMaus.PIPS, tries)
-			birthsign := RollBirthsign()
-			fmt.Printf("Sign: %s | Disposition: %s\n", birthsign.Sign, birthsign.Disposition)
+			fmt.Printf("Sign: %s | Disposition: %s\n", myMaus.Sign, myMaus.Disposition)
 			color, pattern := RollCoat()
 			fmt.Printf("Color: %s | Pattern: %s\n", color.Color, pattern.Pattern)
 			os.Exit(0)
@@ -86,6 +85,9 @@ func (myMaus Maus) GenStats() Maus {
 	myMaus.WIL = RollStat("3d6kh2")
 	myMaus.HP = RollStat("1d6")
 	myMaus.PIPS = RollStat("1d6")
+	birthsign := RollBirthsign()
+	myMaus.Sign = birthsign.Sign
+	myMaus.Disposition = birthsign.Disposition
 	return myMaus
 }
 
