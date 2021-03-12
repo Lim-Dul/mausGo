@@ -1,0 +1,208 @@
+{
+	"hp": [
+		{
+			"pips": [
+				{
+					"background": "Test subject",
+					"item1": "Spell: Magic missile",
+					"item2": "Lead coat (Heavy armour)"
+				},
+				{
+					"background": "Kitchen forager",
+					"item1": "Shield & jerkin (Light armour)",
+					"item2": "Cookpots"
+				},
+				{
+					"background": "Cage dweller",
+					"item1": "Spell: Be understood",
+					"item2": "Bottle of milk"
+				},
+				{
+					"background": "Hedge witch",
+					"item1": "Spell: Heal",
+					"item2": "Incense stick"
+				},
+				{
+					"background": "Leatherworker",
+					"item1": "Shield & jerkin (Light armour)",
+					"item2": "Shears"
+				},
+				{
+					"background": "Street tough",
+					"item1": "Street tough",
+					"item2": "Street tough"
+				}
+			]
+		},
+		{
+			"pips": [
+				{
+					"background": "Mendicant priest",
+					"item1": "Street tough",
+					"item2": "Holy symbol"
+				},
+				{
+					"background": "Beetleherd",
+					"item1": "Hireling: Loyal beetle",
+					"item2": "Pole, 6\""
+				},
+				{
+					"background": "Ale brewer",
+					"item1": "Hireling: Drunken torchbearer",
+					"item2": "Small barrel of ale"
+				},
+				{
+					"background": "Fishermouse",
+					"item1": "Net",
+					"item2": "Needle (Light, d6)"
+				},
+				{
+					"background": "Needle (Light, d6)",
+					"item1": "Hammer (Medium, d6/d8)",
+					"item2": "Metal file"
+				},
+				{
+					"background": "Wireworker",
+					"item1": "Wire, spool",
+					"item2": "Electric lantern"
+				}
+			]
+		},
+		{
+			"pips": [
+				{
+					"background": "Woodcutter",
+					"item1": "Axe (Medium, d6/d8)",
+					"item2": "Twine, roll"
+				},
+				{
+					"background": "Bat cultist",
+					"item1": "Spell: Darkness",
+					"item2": "Bag of bat teeth"
+				},
+				{
+					"background": "Tin miner",
+					"item1": "Tin miner",
+					"item2": "Lantern"
+				},
+				{
+					"background": "Lantern",
+					"item1": "Trashhook (Heavy, d10)",
+					"item2": "Mirror"
+				},
+				{
+					"background": "Wall rover",
+					"item1": "Fishhook",
+					"item2": "Thread, spool"
+				},
+				{
+					"background": "Merchant",
+					"item1": "Hireling: Pack rat",
+					"item2": "20p IOU from a noblemouse"
+				}
+			]
+		},
+		{
+			"pips": [
+				{
+					"background": "Raft crew",
+					"item1": "Hammer (Medium, d6/d8)",
+					"item2": "Wooden spikes"
+				},
+				{
+					"background": "Worm wrangler",
+					"item1": "Pole, 6\"",
+					"item2": "Soap"
+				},
+				{
+					"background": "Sparrow rider",
+					"item1": "Fishhook",
+					"item2": "Goggles"
+				},
+				{
+					"background": "Sewer guide",
+					"item1": "Metal file",
+					"item2": "Thread, spool"
+				},
+				{
+					"background": "Prison guard",
+					"item1": "Chain, 6\"",
+					"item2": "Spear (Heavy, d10)"
+				},
+				{
+					"background": "Fungus farmer",
+					"item1": "Dried mushroom (as rations)",
+					"item2": "Spore mask"
+				}
+			]
+		},
+		{
+			"pips": [
+				{
+					"background": "Dam builder",
+					"item1": "Shovel",
+					"item2": "Wooden spikes"
+				},
+				{
+					"background": "Cartographer",
+					"item1": "Quill & ink",
+					"item2": "Compass"
+				},
+				{
+					"background": "Trap thief",
+					"item1": "Block of cheese",
+					"item2": "Glue"
+				},
+				{
+					"background": "Vagabond",
+					"item1": "Tent",
+					"item2": "Treasure map, dubious"
+				},
+				{
+					"background": "Grain farmer",
+					"item1": "Spear (Heavy, d10)",
+					"item2": "Whistle"
+				},
+				{
+					"background": "Message runner",
+					"item1": "Bedroll",
+					"item2": "Documents, sealed"
+				}
+			]
+		},
+		{
+			"pips": [
+				{
+					"background": "Troubadour",
+					"item1": "Musical instrument",
+					"item2": "Disguise kit"
+				},
+				{
+					"background": "Gambler",
+					"item1": "Set of loaded dice",
+					"item2": "Mirror"
+				},
+				{
+					"background": "Sap tapper",
+					"item1": "Bucket",
+					"item2": "Wooden spikes"
+				},
+				{
+					"background": "Bee keeper",
+					"item1": "Jar of honey",
+					"item2": "Net"
+				},
+				{
+					"background": "Librarian",
+					"item1": "Scrap of obscure book",
+					"item2": "Quill & ink"
+				},
+				{
+					"background": "Pauper noblemouse",
+					"item1": "Felt hat",
+					"item2": "Perfume"
+				}
+			]
+		}
+	]
+}

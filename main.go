@@ -25,6 +25,9 @@ type Maus struct {
 	Color       string
 	Pattern     string
 	Detail      string
+	Background  string
+	Item1       string
+	Item2       string
 }
 
 // Birthsigns is a collection of birthsigns from the Mausritter rulebook
@@ -64,14 +67,31 @@ type Detail struct {
 	Detail string `json:"detail"`
 }
 
+// Backgrounds
+type Backgrounds struct {
+	HP []HP `json: "hp"`
+}
+
+// HP
+type HP struct {
+	Pips []Pip `json: "pips"`
+}
+
+// Pip
+type Pip struct {
+	Background string `json: "background"`
+	Item1      string `json: "item1"`
+	Item2      string `json: "item2"`
+}
+
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
 
-	minSTR := flag.Int("minSTR", 9, "Minimum STR")
-	minDEX := flag.Int("minDEX", 9, "Minimum DEX")
-	minWIL := flag.Int("minWIL", 9, "Minimum WIL")
-	minHP := flag.Int("minHP", 4, "Minimum HP")
-	minPIPS := flag.Int("minPIPS", 4, "Minimum Pips")
+	minSTR := flag.Int("minSTR", 2, "Minimum STR")
+	minDEX := flag.Int("minDEX", 2, "Minimum DEX")
+	minWIL := flag.Int("minWIL", 2, "Minimum WIL")
+	minHP := flag.Int("minHP", 1, "Minimum HP")
+	minPIPS := flag.Int("minPIPS", 1, "Minimum Pips")
 
 	flag.Parse()
 
@@ -85,7 +105,8 @@ func main() {
 			fmt.Printf("STR: %d DEX: %d WIL: %d HP: %d Pips: %d Tries: %d\n", myMaus.STR, myMaus.DEX, myMaus.WIL, myMaus.HP, myMaus.PIPS, tries)
 			fmt.Printf("Sign: %s | Disposition: %s\n", myMaus.Sign, myMaus.Disposition)
 			fmt.Printf("Color: %s | Pattern: %s\n", myMaus.Color, myMaus.Pattern)
-			fmt.Printf("Detail: %s\n", myMaus.Detail)
+			fmt.Printf("Detail: %s | Background: %s\n", myMaus.Detail, myMaus.Background)
+			fmt.Printf("Items: %s, %s, Torches, Rations, <+Weapon of Choice>\n", myMaus.Item1, myMaus.Item2)
 			os.Exit(0)
 		}
 	}
@@ -102,6 +123,8 @@ func (myMaus Maus) GenStats() Maus {
 	myMaus.Sign, myMaus.Disposition = RollBirthsign()
 	myMaus.Color, myMaus.Pattern = RollCoat()
 	myMaus.Detail = RollDetail()
+
+	myMaus.Background, myMaus.Item1, myMaus.Item2 = GetBackground(myMaus.HP, myMaus.PIPS)
 
 	return myMaus
 }
@@ -157,6 +180,18 @@ func RollDetail() string {
 	var detail string
 	detail = details.Details[n].Detail
 	return detail
+}
+
+// GetBackground
+func GetBackground(hp, pips int) (string, string, string) {
+	rawData := ReadJSON("config/background.json")
+	var backgrounds Backgrounds
+	json.Unmarshal(rawData, &backgrounds)
+	background := backgrounds.HP[hp-1].Pips[pips-1].Background
+	item1 := backgrounds.HP[hp-1].Pips[pips-1].Item1
+	item2 := backgrounds.HP[hp-1].Pips[pips-1].Item2
+
+	return background, item1, item2
 }
 
 // ReadJSON reads raw data from a JSON file
