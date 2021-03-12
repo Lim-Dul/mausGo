@@ -235,7 +235,7 @@ func ReadJSON(file string) []byte {
 	if err != nil {
 		fmt.Println(err)
 	}
-	// defer the closing of our jsonFile so it can be processed until the caller Function finishes
+	// defer the closing of our jsonFile so it can be processed until the function finishes
 	defer jsonFile.Close()
 
 	// read our opened JSON file as a byte array and return it
