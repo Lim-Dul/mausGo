@@ -1,5 +1,6 @@
 # mausGo
-Character Generator for Mausritter written in Go
+Character Generator for Mausritter written in Go.
+Used it to learn the language. :)
 ## Usage
 ``` go run .\mausGo.go ```
 or
