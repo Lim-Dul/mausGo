@@ -105,8 +105,8 @@ func main() {
 			*myMaus = myMaus.GenDetails()
 			fmt.Printf("STR: %d DEX: %d WIL: %d HP: %d Pips: %d Tries: %d\n", myMaus.STR, myMaus.DEX, myMaus.WIL, myMaus.HP, myMaus.PIPS, tries)
 			fmt.Printf("Sign: %s | Disposition: %s\n", myMaus.Sign, myMaus.Disposition)
-			fmt.Printf("Color: %s | Pattern: %s\n", myMaus.Color, myMaus.Pattern)
-			fmt.Printf("Detail: %s | Background: %s\n", myMaus.Detail, myMaus.Background)
+			fmt.Printf("Color: %s | Pattern: %s | Detail: %s\n", myMaus.Color, myMaus.Pattern, myMaus.Detail)
+			fmt.Printf("Background: %s\n", myMaus.Background)
 			fmt.Printf("Items: %s, %s, Torches, Rations, <+Weapon of Choice>\n", myMaus.Item1, myMaus.Item2)
 			os.Exit(0)
 		}

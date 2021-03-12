@@ -29,8 +29,8 @@
 				},
 				{
 					"background": "Street tough",
-					"item1": "Street tough",
-					"item2": "Street tough"
+					"item1": "Dagger (Light, d6)",
+					"item2": "Flask of coffee"
 				}
 			]
 		},
@@ -38,7 +38,7 @@
 			"pips": [
 				{
 					"background": "Mendicant priest",
-					"item1": "Street tough",
+					"item1": "Spell: Restore",
 					"item2": "Holy symbol"
 				},
 				{
@@ -57,7 +57,7 @@
 					"item2": "Needle (Light, d6)"
 				},
 				{
-					"background": "Needle (Light, d6)",
+					"background": "Blacksmith",
 					"item1": "Hammer (Medium, d6/d8)",
 					"item2": "Metal file"
 				},
@@ -82,11 +82,11 @@
 				},
 				{
 					"background": "Tin miner",
-					"item1": "Tin miner",
+					"item1": "Pickaxe (Medium, d6/d8)",
 					"item2": "Lantern"
 				},
 				{
-					"background": "Lantern",
+					"background": "Trash collector",
 					"item1": "Trashhook (Heavy, d10)",
 					"item2": "Mirror"
 				},
@@ -156,7 +156,7 @@
 				{
 					"background": "Vagabond",
 					"item1": "Tent",
-					"item2": "Treasure map, dubious"
+					"item2": "Treasure map (dubious)"
 				},
 				{
 					"background": "Grain farmer",
@@ -166,7 +166,7 @@
 				{
 					"background": "Message runner",
 					"item1": "Bedroll",
-					"item2": "Documents, sealed"
+					"item2": "Documents (sealed)"
 				}
 			]
 		},
