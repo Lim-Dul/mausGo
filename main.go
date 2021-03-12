@@ -102,6 +102,7 @@ func main() {
 		tries++
 		*myMaus = myMaus.GenStats()
 		if myMaus.STR >= *minSTR && myMaus.DEX >= *minDEX && myMaus.WIL >= *minWIL && myMaus.HP >= *minHP && myMaus.PIPS >= *minPIPS {
+			*myMaus = myMaus.GenDetails()
 			fmt.Printf("STR: %d DEX: %d WIL: %d HP: %d Pips: %d Tries: %d\n", myMaus.STR, myMaus.DEX, myMaus.WIL, myMaus.HP, myMaus.PIPS, tries)
 			fmt.Printf("Sign: %s | Disposition: %s\n", myMaus.Sign, myMaus.Disposition)
 			fmt.Printf("Color: %s | Pattern: %s\n", myMaus.Color, myMaus.Pattern)
@@ -140,6 +141,17 @@ func RollStat(input string) int {
 		return res.Int()
 	}
 	return 0
+}
+
+// GenDetails generates the details of a Mausritter character
+func (myMaus Maus) GenDetails() Maus {
+	myMaus.Sign, myMaus.Disposition = RollBirthsign()
+	myMaus.Color, myMaus.Pattern = RollCoat()
+	myMaus.Detail = RollDetail()
+
+	myMaus.Background, myMaus.Item1, myMaus.Item2 = GetBackground(myMaus.HP, myMaus.PIPS)
+
+	return myMaus
 }
 
 // RollBirthsign rolls a random birthsign combination from the Mausritter rulebook
