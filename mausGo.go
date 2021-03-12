@@ -95,6 +95,17 @@ func main() {
 	minPIPS := flag.Int("minPIPS", 1, "Minimum Pips")
 	// parse the flags
 	flag.Parse()
+
+	// check if user input impossible to reach minimum values
+	if *minSTR > 12 || *minDEX > 12 || *minWIL > 12 {
+		fmt.Println("Min values too high! Base attributes cannot be higher than 12!")
+		os.Exit(1)
+	}
+	if *minHP > 6 || *minPIPS > 6 {
+		fmt.Println("Min values too high! HP/Pips cannot be higher than 6!")
+		os.Exit(2)
+	}
+
 	//initialize myMaus
 	myMaus := new(Maus)
 	// count how many tries we needed
