@@ -8,7 +8,7 @@ after building
 ### Advanced Options
 Use the following flags to set minimum values for certain attributes:
 ```
--minDEX int
+  -minDEX int
         Minimum DEX (default 2)
   -minHP int
         Minimum HP (default 1)
@@ -20,4 +20,6 @@ Use the following flags to set minimum values for certain attributes:
         Minimum WIL (default 2)
 ```
 Example:
-``` mausGo.exe -minSTR 12 -minHP 2 ```
+```
+mausGo.exe -minSTR 12 -minHP 2
+```
