@@ -121,12 +121,6 @@ func (myMaus Maus) GenStats() Maus {
 	myMaus.HP = RollStat("1d6")
 	myMaus.PIPS = RollStat("1d6")
 
-	myMaus.Sign, myMaus.Disposition = RollBirthsign()
-	myMaus.Color, myMaus.Pattern = RollCoat()
-	myMaus.Detail = RollDetail()
-
-	myMaus.Background, myMaus.Item1, myMaus.Item2 = GetBackground(myMaus.HP, myMaus.PIPS)
-
 	return myMaus
 }
 
