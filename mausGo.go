@@ -201,7 +201,7 @@ func RollCoat() (string, string) {
 // RollDetail rolls a random detail from the Mausritter rulebook
 func RollDetail() string {
 	// details stored in JSON
-	rawData := ReadJSON("config/detail.json")
+	rawData := ReadJSON("config/details.json")
 	// initialize Details struct and unmarshal JSON into it
 	var details Details
 	json.Unmarshal(rawData, &details)
@@ -215,7 +215,7 @@ func RollDetail() string {
 // GetBackground reads out the background and starting items from the Mausritter rulebook based on HP/Pips rolled
 func GetBackground(hp, pips int) (string, string, string) {
 	// backgrounds stored in JSON
-	rawData := ReadJSON("config/background.json")
+	rawData := ReadJSON("config/backgrounds.json")
 	// initialize Details struct and unmarshal JSON into it
 	var backgrounds Backgrounds
 	json.Unmarshal(rawData, &backgrounds)
