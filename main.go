@@ -69,19 +69,19 @@ type Detail struct {
 
 // Backgrounds
 type Backgrounds struct {
-	HP []HP `json: "hp"`
+	HP []HP `json:"hp"`
 }
 
 // HP
 type HP struct {
-	Pips []Pip `json: "pips"`
+	Pips []Pip `json:"pips"`
 }
 
 // Pip
 type Pip struct {
-	Background string `json: "background"`
-	Item1      string `json: "item1"`
-	Item2      string `json: "item2"`
+	Background string `json:"background"`
+	Item1      string `json:"item1"`
+	Item2      string `json:"item2"`
 }
 
 func main() {
