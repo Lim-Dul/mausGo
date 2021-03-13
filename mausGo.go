@@ -8,7 +8,8 @@ import (
 	"math/rand"     // for random number generation
 	"os"            // for exit codes
 	"strconv"       // for converting strings
-	"time"          // for timing script execution and creating random seed
+	"sync"
+	"time" // for timing script execution and creating random seed
 
 	"github.com/justinian/dice" // for convenient dice rolling
 )
@@ -85,6 +86,7 @@ type Pip struct {
 }
 
 func main() {
+	start := time.Now()                    // start execution timer
 	rand.Seed(time.Now().UTC().UnixNano()) // seed the randomizer
 
 	// CLI flags with name, default value and help string
@@ -108,25 +110,47 @@ func main() {
 
 	//initialize myMaus
 	myMaus := new(Maus)
-	// count how many tries we needed
-	tries := 0
-	for {
-		tries++
-		// generate base stats of myMaus without details to increase performance
-		*myMaus = myMaus.GenStats()
-		// check if myMaus passed the required attribute values
-		if myMaus.STR >= *minSTR && myMaus.DEX >= *minDEX && myMaus.WIL >= *minWIL && myMaus.HP >= *minHP && myMaus.PIPS >= *minPIPS {
-			// now that we passed the check, we can generate the rest of the details
-			*myMaus = myMaus.GenDetails()
-			// print out everything and exit
-			fmt.Printf("STR: %d DEX: %d WIL: %d HP: %d Pips: %d Tries: %d\n", myMaus.STR, myMaus.DEX, myMaus.WIL, myMaus.HP, myMaus.PIPS, tries)
-			fmt.Printf("Sign: %s | Disposition: %s\n", myMaus.Sign, myMaus.Disposition)
-			fmt.Printf("Color: %s | Pattern: %s | Detail: %s\n", myMaus.Color, myMaus.Pattern, myMaus.Detail)
-			fmt.Printf("Background: %s\n", myMaus.Background)
-			fmt.Printf("Items: %s, %s, Torches, Rations, <+Weapon of Choice>\n", myMaus.Item1, myMaus.Item2)
-			os.Exit(0)
-		}
+
+	var wg sync.WaitGroup
+	var mutex sync.Mutex
+	QuitChan := make(chan bool)
+
+	for i := 0; i < 8; i++ {
+		wg.Add(1)
+		go func() {
+			var tempMaus Maus
+			defer wg.Done()
+			for {
+				select {
+				case <-QuitChan:
+					return
+				default:
+					tempMaus = tempMaus.GenStats()
+					if tempMaus.STR >= *minSTR && tempMaus.DEX >= *minDEX && tempMaus.WIL >= *minWIL && tempMaus.HP >= *minHP && tempMaus.PIPS >= *minPIPS {
+						QuitChan <- true
+						close(QuitChan)
+						mutex.Lock()
+						*myMaus = tempMaus
+						mutex.Unlock()
+						return
+					}
+				}
+			}
+		}()
 	}
+	wg.Wait()
+
+	// now that we passed the check, we can generate the rest of the details
+	*myMaus = myMaus.GenDetails()
+	// print out everything and exit
+	fmt.Printf("STR: %d DEX: %d WIL: %d HP: %d Pips: %d\n", myMaus.STR, myMaus.DEX, myMaus.WIL, myMaus.HP, myMaus.PIPS)
+	fmt.Printf("Sign: %s | Disposition: %s\n", myMaus.Sign, myMaus.Disposition)
+	fmt.Printf("Color: %s | Pattern: %s | Detail: %s\n", myMaus.Color, myMaus.Pattern, myMaus.Detail)
+	fmt.Printf("Background: %s\n", myMaus.Background)
+	fmt.Printf("Items: %s, %s, Torches, Rations, <+Weapon of Choice>\n", myMaus.Item1, myMaus.Item2)
+	elapsed := time.Since(start)
+	fmt.Printf("Execution time %s\n", elapsed)
+	os.Exit(0)
 }
 
 // GenStats generates the base stats of a Mausritter character and returns the struct
