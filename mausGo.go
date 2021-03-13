@@ -108,28 +108,38 @@ func main() {
 		os.Exit(2)
 	}
 
-	//initialize myMaus
+	// initialize myMaus
 	myMaus := new(Maus)
 
+	// create WaitGroup for goroutines
 	var wg sync.WaitGroup
+	// mutex necessary to lock updating shared objects
 	var mutex sync.Mutex
+	// create channel to signal goroutines to finish
 	QuitChan := make(chan bool)
 
+	// add 8 goroutines
 	for i := 0; i < 8; i++ {
 		wg.Add(1)
+		// we'll be creating Maus structs in parallel
 		go func() {
 			var tempMaus Maus
+			// decrease waitgroup counter after function finishes
 			defer wg.Done()
 			for {
+				// if message received on QuitChan, exit
 				select {
 				case <-QuitChan:
 					return
+				// otherwise roll tempMaus
 				default:
 					tempMaus = tempMaus.GenStats()
 					if tempMaus.STR >= *minSTR && tempMaus.DEX >= *minDEX && tempMaus.WIL >= *minWIL && tempMaus.HP >= *minHP && tempMaus.PIPS >= *minPIPS {
+						// if tempMaus passes checks, we send quit message on channel to finish all other goroutines
 						QuitChan <- true
-						close(QuitChan)
+						// lock myMaus so other competing goroutines don't collide
 						mutex.Lock()
+						// update myMaus
 						*myMaus = tempMaus
 						mutex.Unlock()
 						return
@@ -138,6 +148,7 @@ func main() {
 			}
 		}()
 	}
+	// continue when waitgroup finished
 	wg.Wait()
 
 	// now that we passed the check, we can generate the rest of the details
