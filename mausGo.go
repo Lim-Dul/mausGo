@@ -4,9 +4,9 @@ import (
 	"encoding/json" // for reading JSON
 	"flag"          // for parsing CLI flags
 	"fmt"           // for basic I/O
-	"io/ioutil"     // for disk i/o
+	"io"            // for disk I/O
 	"math/rand"     // for random number generation
-	"os"            // for exit codes
+	"os"            // for exit codes and disk I/O
 	"strconv"       // for converting strings
 	"time"          // for timing script execution and creating random seed
 
@@ -239,6 +239,6 @@ func ReadJSON(file string) []byte {
 	defer jsonFile.Close()
 
 	// read our opened JSON file as a byte array and return it
-	byteValue, _ := ioutil.ReadAll(jsonFile)
+	byteValue, _ := io.ReadAll(jsonFile)
 	return byteValue
 }
